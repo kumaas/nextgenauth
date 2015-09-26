@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.widget.Toast;
 
+import ashfox.nextgenauthentication.util.AuthResult;
+import ashfox.nextgenauthentication.util.Authenticator;
+
 /**
 
  */
@@ -23,6 +26,9 @@ public class LockScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen);
+        Authenticator a =  new Authenticator();
+        if(a.verify() == AuthResult.PASSED)
+            Log.d("Authenticated","");
     }
 
 }

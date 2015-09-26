@@ -1,31 +1,106 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc" tools:context=".LockScreen">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:background="#0099cc" tools:context=".LockScreen"
+    >
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:text="@string/dummy_content" />
+    <View
+        android:id="@+id/sep1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/darker_gray"/>
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button1"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip" />
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button2"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_toRightOf="@id/button1" />
 
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button3"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_toRightOf="@id/button2"/>
 
-        </LinearLayout>
-    </FrameLayout>
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button4"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button1"/>
 
-</FrameLayout>
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button5"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button2"
+        android:layout_toRightOf="@id/button4"/>
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button6"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button3"
+        android:layout_toRightOf="@id/button5"/>
+
+    <!-- 3rd level -->
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button7"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button4" />
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button8"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button5"
+        android:layout_toRightOf="@id/button7"/>
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button9"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button5"
+        android:layout_toRightOf="@id/button8"/>
+
+    <!-- level 4 -->
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button10"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button7"/>
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button11"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button7"
+        android:layout_toRightOf="@id/button10"/>
+
+    <ashfox.nextgenauthentication.util.ButtonView
+        android:id="@+id/button12"
+        android:src="@android:drawable/alert_dark_frame"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@id/button9"
+        android:layout_toRightOf="@id/button11"/>
+
+
+</RelativeLayout>

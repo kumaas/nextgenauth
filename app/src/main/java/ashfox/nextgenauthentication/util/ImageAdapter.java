@@ -20,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ashfox.nextgenauthentication.LockScreen;
 import ashfox.nextgenauthentication.R;
 
 public class ImageAdapter extends BaseAdapter {
@@ -45,13 +46,15 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
+        final int elementIndex = position + 1;
+
         final ViewHolder holder;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.item, null);
             holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
             holder.textView = (TextView) convertView.findViewById(R.id.textView1);
-            holder.textView.setText(String.valueOf(position+1));
+            holder.textView.setText(String.valueOf(elementIndex));
             holder.imageview.setScaleType(ImageView.ScaleType.CENTER_CROP);
             holder.imageview.setPadding(8, 8, 8, 8);
             convertView.setTag(holder);
@@ -75,7 +78,9 @@ public class ImageAdapter extends BaseAdapter {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // have same code as onTouchEvent() (for the Activity) above
-                Log.d("bharta", "X: " + String.valueOf(event.getX()) + " Pos:" + String.valueOf(position));
+                Log.d("KeyPressed", String.valueOf(elementIndex));
+                Storage.addHistory(elementIndex, event.getX(), event.getY(), event.getPressure(), 0);
+                ((LockScreen)mContext).display.append(String.valueOf(elementIndex));
                 return false;
             }
         });

@@ -22,7 +22,7 @@ public class Authenticator{
             int count = 0;
             for(Double score : pscorer.score(test_data)){
                 Log.d("xxxxxxxxx  ", String.valueOf(score));
-                if(score >= 0.35){
+                if(score >= 0.8){
                     count++;
                 }
             }

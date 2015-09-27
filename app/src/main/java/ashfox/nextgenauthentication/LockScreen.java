@@ -31,7 +31,7 @@ import ashfox.nextgenauthentication.util.Storage;
 
  */
 public class LockScreen extends Activity {
-    public TextView display;
+    public TextView display, challenge;
     public enum modes {TRAIN, AUTHENTICATE};
     private modes mode = modes.AUTHENTICATE;
     private GestureDetector detector;
@@ -43,6 +43,8 @@ public class LockScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen);
         display = (TextView) findViewById(R.id.tv);
+        challenge = (TextView) findViewById(R.id.tvChallenge);
+        challenge.setText(String.valueOf((getRandomFiveDigits())));
 
         /* set up the button listeners */
         Button reset = (Button) findViewById(R.id.reset_model);
@@ -52,6 +54,7 @@ public class LockScreen extends Activity {
                 // reset the model
                 Storage.clearCurrent();
                 Storage.clearHistory();
+                display.setText("");
                 Toast.makeText(getApplicationContext(), "Cleared Model", Toast.LENGTH_SHORT).show();
             }
         });
@@ -60,7 +63,13 @@ public class LockScreen extends Activity {
         train.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton toggleButton, boolean isChecked) {
-                mode = isChecked ? modes.TRAIN : modes.AUTHENTICATE;
+                if(isChecked){
+                    mode = modes.TRAIN;
+                } else {
+                    mode = modes.AUTHENTICATE;
+                }
+                display.setText("");
+                challenge.setText(String.valueOf((getRandomFiveDigits())));
             }
         });
 
@@ -87,15 +96,10 @@ public class LockScreen extends Activity {
                     Toast.makeText(getApplicationContext(),
                             "Trained: set size = " + String.valueOf(Storage.getHistory().size()),
                             Toast.LENGTH_SHORT).show();
-
-                    TextView tvChallenge = (TextView) findViewById(R.id.tvChallenge);
-                    Random r = new Random(System.currentTimeMillis());
-                    tvChallenge.setText(String.valueOf((1 + r.nextInt(2)) * 10000 + r.nextInt(10000)));
-                    display.setText("");
                 }
                 Storage.clearCurrent();
-                Log.d("madar", "Current: " + String.valueOf(Storage.getCurrent().size()));
-                Log.d("behen", "History: " + String.valueOf(Storage.getHistory().size()));
+                display.setText("");
+                challenge.setText(String.valueOf((getRandomFiveDigits())));
             }
 
         });
@@ -105,6 +109,11 @@ public class LockScreen extends Activity {
         gridview.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         final ListAdapter adp = new ImageAdapter(this);
         gridview.setAdapter(adp);
+    }
+
+    private long getRandomFiveDigits(){
+        Random r = new Random(System.currentTimeMillis());
+        return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
     }
 
 }

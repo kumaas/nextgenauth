@@ -37,7 +37,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return 12;
+        return 10;
     }
 
     public Object getItem(int position) {
@@ -50,13 +50,14 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final int elementIndex = position + 1;
+        final int elementIndex = (position + 1) % 10;
 
         final ViewHolder holder;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.item, null);
             holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
+            holder.imageview.setImageResource(mThumbIds[elementIndex]);
             holder.textView = (TextView) convertView.findViewById(R.id.textView1);
             holder.textView.setText(String.valueOf(elementIndex));
             holder.imageview.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -90,13 +91,12 @@ public class ImageAdapter extends BaseAdapter {
                 /* we now record the event*/
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     eventDuration = System.currentTimeMillis() - LastKeyDownTime;
+                    // have same code as onTouchEvent() (for the Activity) above
+                    Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), eventDuration);
+                    ((LockScreen) mContext).display.append(String.valueOf(elementIndex));
+                    return true;
                 }
-
-
-                // have same code as onTouchEvent() (for the Activity) above
-                Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), eventDuration);
-                ((LockScreen) mContext).display.append(String.valueOf(elementIndex));
-                return true;
+                return false;
             }
         });
 
@@ -105,5 +105,8 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
+            R.drawable.a0, R.drawable.a1, R.drawable.a2, R.drawable.a3,
+            R.drawable.a4, R.drawable.a5, R.drawable.a6, R.drawable.a7,
+            R.drawable.a8, R.drawable.a9
     };
 }

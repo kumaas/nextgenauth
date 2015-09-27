@@ -7,24 +7,31 @@
         android:id="@+id/llout2"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:gravity = "center_horizontal">
+        android:gravity = "center_horizontal"
+        android:paddingBottom="50dip"
+        android:paddingTop="20dip">
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="fill_parent"
-            android:layout_height="100dip"
+            android:layout_height="60dip"
             android:singleLine="true"
             android:layout_weight="0.5"
             android:textSize="32sp"
+            android:background="@drawable/border"
+            android:paddingRight="10dip"
+            android:gravity="center"
             />
 
         <TextView
             android:id="@+id/tvChallenge"
             android:layout_width="fill_parent"
-            android:layout_height="100dip"
+            android:layout_height="60dip"
             android:singleLine="true"
             android:layout_weight="0.5"
             android:textSize="32sp"
+            android:background="@drawable/border"
+            android:gravity="center"
             />
     </LinearLayout>
 
@@ -38,12 +45,13 @@
         android:horizontalSpacing="20dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_below="@id/llout2"/>
+        android:layout_below="@id/llout2"
+        android:paddingBottom="10dip"/>
 
     <View
         android:id="@+id/separator"
         android:layout_width="match_parent"
-        android:layout_height="10dip"
+        android:layout_height="50dip"
         android:layout_below="@id/gridview" />
 
     <LinearLayout
@@ -66,15 +74,20 @@
             android:layout_height="wrap_content"
             android:text="Enter"
             android:layout_weight="0.5"
-            android:layout_below="@id/separator" />
-    </LinearLayout>
+            android:layout_below="@id/separator"
 
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
     <ToggleButton
         android:id="@+id/train"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textOff = "Authentication Mode"
         android:textOn = "Training Mode"
-        android:layout_below="@id/llout" />
+        android:layout_below="@id/llout"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

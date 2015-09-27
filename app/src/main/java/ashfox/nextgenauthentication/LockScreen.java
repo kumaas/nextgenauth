@@ -116,4 +116,11 @@ public class LockScreen extends Activity {
         return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
     }
 
+    // Numbers!
+    private long[] mThumbIds = {
+            98264137, 47026249,
+            51457784, 42581236,
+            76947571, 52479253,
+            42283911
+    };
 }

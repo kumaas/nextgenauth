@@ -92,7 +92,7 @@ public class ImageAdapter extends BaseAdapter {
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     eventDuration = System.currentTimeMillis() - LastKeyDownTime;
                     // have same code as onTouchEvent() (for the Activity) above
-                    Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), eventDuration);
+                    Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), event.getSize()    /*eventDuration*/);
                     ((LockScreen) mContext).display.append(String.valueOf(elementIndex));
                     return true;
                 }

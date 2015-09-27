@@ -1,5 +1,7 @@
 package ashfox.nextgenauthentication.util;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -31,6 +33,10 @@ public class PressureBasedScorer {
         }
         for(Map.Entry<Integer, ArrayList<Double>> entry : key2Pr.entrySet()){
             key2GF.put(new Integer(entry.getKey()), new GaussianFilter(entry.getValue()));
+            Log.d("Pres-> ", String.valueOf(entry.getKey()) + " | M: " +
+                    String.valueOf(key2GF.get(entry.getKey()).getMean()) + " | V: " +
+                    String.valueOf(key2GF.get(entry.getKey()).getStandard_deviation()) + " | S: " +
+                    String.valueOf(key2GF.get(entry.getKey()).getNumSamples()));
         }
         return true;
     }

@@ -1,5 +1,7 @@
 package ashfox.nextgenauthentication.util;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -33,6 +35,10 @@ public class PositionBasedScorer {
         }
         for(Map.Entry<Integer, ArrayList<Double>> entry : key2Pr.entrySet()){
             xkey2GF.put(new Integer(entry.getKey()), new GaussianFilter(entry.getValue()));
+            Log.d("XPos-> ", String.valueOf(entry.getKey()) + " | M: " +
+                    String.valueOf(xkey2GF.get(entry.getKey()).getMean()) + " | V: " +
+                    String.valueOf(xkey2GF.get(entry.getKey()).getStandard_deviation()) + " | S: " +
+                    String.valueOf(xkey2GF.get(entry.getKey()).getNumSamples()));
         }
 
         HashMap<Integer, ArrayList<Double>> ykey2Pr = new HashMap<>();
@@ -50,6 +56,10 @@ public class PositionBasedScorer {
         }
         for(Map.Entry<Integer, ArrayList<Double>> entry : ykey2Pr.entrySet()){
             ykey2GF.put(new Integer(entry.getKey()), new GaussianFilter(entry.getValue()));
+            Log.d("YPos-> ", String.valueOf(entry.getKey()) + " | M: " +
+                    String.valueOf(ykey2GF.get(entry.getKey()).getMean()) + " | V: " +
+                    String.valueOf(ykey2GF.get(entry.getKey()).getStandard_deviation()) + " | S: " +
+                    String.valueOf(ykey2GF.get(entry.getKey()).getNumSamples()));
         }
 
         return true;

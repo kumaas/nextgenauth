@@ -36,11 +36,14 @@ public class GaussianFilter {
 //        Log.d("-------",String.valueOf(standard_deviation));
     }
 
-    public boolean isWithinVarianceLevel(double data_point, int level) {
-        return Math.abs(data_point - mean) <= (level * standard_deviation);
-    }
     public double varianceLevel(double data_point){
-        double shit = Math.ceil(Math.abs(data_point-mean)/standard_deviation);
+        double shit;
+        if(standard_deviation != 0){
+            shit = Math.abs(data_point-mean)/standard_deviation;
+        }
+        else{
+            shit = 15;
+        }
 //        Log.d("~~~~~~~~~~SD",String.valueOf(standard_deviation));
 //        Log.d("~~~~~~~~~~DP",String.valueOf(data_point));
 //        Log.d("`~~~~~~~~~SH",String.valueOf(shit));

@@ -20,12 +20,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+
 import ashfox.nextgenauthentication.LockScreen;
 import ashfox.nextgenauthentication.R;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
+    private static long LastKeyDownTime;
 
     public ImageAdapter(Context c) {
         mContext = c;
@@ -77,11 +81,22 @@ public class ImageAdapter extends BaseAdapter {
         convertView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    LastKeyDownTime = System.currentTimeMillis();
+                    return true;
+                }
+
+                long eventDuration = 0;
+                /* we now record the event*/
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    eventDuration = System.currentTimeMillis() - LastKeyDownTime;
+                }
+
+
                 // have same code as onTouchEvent() (for the Activity) above
-                Log.d("KeyPressed", String.valueOf(elementIndex));
-                Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), 0);
-                ((LockScreen)mContext).display.append(String.valueOf(elementIndex));
-                return false;
+                Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), eventDuration);
+                ((LockScreen) mContext).display.append(String.valueOf(elementIndex));
+                return true;
             }
         });
 

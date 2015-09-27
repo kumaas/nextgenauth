@@ -17,7 +17,7 @@ public class Storage {
     }
 
     public static void addHistory(KeyPressAttributes kpa) {
-        if(history.size() >= 100) {
+        if(history.size() >= 1000) {
             history.remove(history.size() - 1);
         }
         history.add(0, kpa);

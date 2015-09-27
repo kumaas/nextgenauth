@@ -67,6 +67,7 @@ We looked at the following signals to generate a unique fingerprint and model fo
 Our application is implemented using Android because it provided to us, APIs that allowed us to query the aforementioned signals, and because we felt that the variety in Android devices would let us test the efficacy of our handpicked signals for the purpose of authentication.
 
 The main screen of the training application is shown below:
+
 ![training_application.png](https://bitbucket.org/repo/B6beke/images/1869717867-training_application.png)
 
 This lets us both train the model and use the model we have, to compare against user-provided random codes to check for various similarities in the typing pattern and authenticate them. The toggle-button at the bottom lets one switch between training and authentication modes. It is generally recommended that one train the model with least a hundred samples before attempting to run input against the model. The numeric code in the textbox to the top-right is provided as a guideline. It is a set of randomly selected numbers which the user may/may not choose to use. We recommend its use because it produces a well-distributed pattern that is distributed and is likely to reflect one's natural typing pattern. 

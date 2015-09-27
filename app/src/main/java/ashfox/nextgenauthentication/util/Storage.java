@@ -36,11 +36,9 @@ public class Storage {
     public static void clearHistory(){
         history.clear();
     }
-
     public static void clearCurrent(){
         current.clear();
     }
-
     public static ArrayList<KeyPressAttributes> getHistory(){
         return history;
     }

@@ -40,7 +40,7 @@ public class GaussianFilter {
         return Math.abs(data_point - mean) <= (level * standard_deviation);
     }
     public double varianceLevel(double data_point){
-        double shit = Math.floor(Math.abs(data_point-mean)/standard_deviation);
+        double shit = Math.ceil(Math.abs(data_point-mean)/standard_deviation);
 //        Log.d("~~~~~~~~~~SD",String.valueOf(standard_deviation));
 //        Log.d("~~~~~~~~~~DP",String.valueOf(data_point));
 //        Log.d("`~~~~~~~~~SH",String.valueOf(shit));

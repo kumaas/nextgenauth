@@ -20,7 +20,7 @@ public class Authenticator{
             Log.d("behen", String.valueOf(train_data.size()));
             pscorer.train(train_data);
             int count = 0;
-            for(Double score : pscorer.score(train_data)){
+            for(Double score : pscorer.score(test_data)){
                 Log.d("xxxxxxxxx  ", String.valueOf(score));
                 if(score >= 0.35){
                     count++;
@@ -58,7 +58,7 @@ public class Authenticator{
             for(Double score : pscorer.score(train_data)){
                 Log.d("xxxxxxxxx  ", String.valueOf(score));
             }
-                        return AuthResult.PASSED;
+            return AuthResult.PASSED;
         }
 
 

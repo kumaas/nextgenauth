@@ -1,5 +1,7 @@
 ## Keystroke-Biometric Authenticator for Android ##
 
+Presentation: http://prezi.com/wfr8xrm00syf/?utm_campaign=share&utm_medium=copy
+
 ### What is this repository for? ###
 
 * An Android application showcasing an authentication mechanism for the next generation which eliminates the use of a fixed passcode/password in favor of a machine learning model which uses various signals to generate a unique fingerprint as the user types in randomly generated numeric codes. 

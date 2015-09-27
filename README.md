@@ -11,7 +11,7 @@
 * Two-factor authentication is cumbersome.
 * We have come up with a model which with further improvements, may change authentication works in future.
 
-Early on, we learned from our experiments that if we plotted the screen coordinates at which users touched various numbers on a numeric keyboard on a touchscreen, one would obtain a Gaussian distribution, such as below. The X and Y coordinate variation is shown for various keys on a numeric on-screen keyboard for a single user. 
+Early on, we learned from our experiments that if we plotted the screen coordinates at which users touched various numbers on a numeric keyboard on a touchscreen, one would obtain a Gaussian distribution, such as below. The position variation is shown for various keys on a numeric on-screen keyboard for a single user. 
 
 ![full_gaussian_mixture.png](https://bitbucket.org/repo/B6beke/images/714821859-full_gaussian_mixture.png)
 

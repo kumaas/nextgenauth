@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Created by kumaas on 9/26/15.
  */
+
 public class DurationBasedScorer {
     private Hashtable<Integer, GaussianFilter> key2GF;
 

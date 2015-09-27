@@ -31,15 +31,16 @@ public class Authenticator{
 
             int count = 0;
             for(int i = 0; i < pressure_scores.size(); i++){
-                Log.d("xxxxxxxxx  ", String.valueOf(pressure_scores.get(i)) + " | "
-                                        + String.valueOf(position_scores.get(i)) + " | "
-                                        + String.valueOf(duration_scores.get(i)));
-                double score = (pressure_scores.get(i) + position_scores.get(i))/2;
-                if(score >= 0.35){
+                Log.d("Score: ", String.valueOf(test_data.get(i).key_press) + " | "
+                        + String.valueOf(pressure_scores.get(i)) + " | "
+                        + String.valueOf(position_scores.get(i)) + " | "
+                        + String.valueOf(duration_scores.get(i)));
+                double score = 0.4 * pressure_scores.get(i) + 0.6 * position_scores.get(i);
+                if(score >= 0.40){
                     count++;
                 }
             }
-            return (count >= test_data.size() / 2) ? AuthResult.PASSED : AuthResult.FAILED;
+            return (count > test_data.size() / 2.0) ? AuthResult.PASSED : AuthResult.FAILED;
         }
 
         /*public AuthResult verify() {

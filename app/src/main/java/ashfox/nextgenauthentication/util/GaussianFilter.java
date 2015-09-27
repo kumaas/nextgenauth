@@ -19,19 +19,26 @@ public class GaussianFilter {
     private double mean;
     private double standard_deviation;
 
+    public double getNumSamples() {
+        return numSamples;
+    }
+
+    private double numSamples;
+
     public GaussianFilter(ArrayList<Double> data_points) {
 
         double total = 0;
         for (double data_point : data_points) {
             total += data_point;
         }
-        mean = total / data_points.size();
+        numSamples = data_points.size();
+        mean = total / numSamples;
 //        Log.d("-------",String.valueOf(mean));
         total = 0;
         for (double data_point : data_points) {
             total += Math.pow(data_point - mean, 2);
         }
-        total /= data_points.size();
+        total /= numSamples;
         standard_deviation = Math.sqrt(total);
 //        Log.d("-------",String.valueOf(standard_deviation));
     }

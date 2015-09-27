@@ -73,8 +73,12 @@ public class LockScreen extends Activity {
 
                 if (mode == modes.AUTHENTICATE) {
                     Authenticator a = new Authenticator();
-                    if (a.verify() == AuthResult.PASSED) {
-                        Toast.makeText(getApplicationContext(), "Authenticated", Toast.LENGTH_SHORT).show();
+                    if (a.verify(Storage.getHistory(), Storage.getCurrent()) == AuthResult.PASSED) {
+                        Toast.makeText(getApplicationContext(), "Authenticated",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Authentication Failed",
+                                Toast.LENGTH_SHORT).show();
                     }
                 } else if(mode == modes.TRAIN) {
                     for(KeyPressAttributes kpa : Storage.getCurrent()){
@@ -89,7 +93,11 @@ public class LockScreen extends Activity {
                     tvChallenge.setText(String.valueOf((1 + r.nextInt(2)) * 10000 + r.nextInt(10000)));
                     display.setText("");
                 }
+                Storage.clearCurrent();
+                Log.d("madar", "Current: " + String.valueOf(Storage.getCurrent().size()));
+                Log.d("behen", "History: " + String.valueOf(Storage.getHistory().size()));
             }
+
         });
 
 

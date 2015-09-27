@@ -17,6 +17,7 @@ public class Authenticator{
 
         public AuthResult verify(ArrayList<KeyPressAttributes> train_data, ArrayList<KeyPressAttributes> test_data) {
             PressureBasedScorer pscorer = new PressureBasedScorer();
+            Log.d("behen", String.valueOf(train_data.size()));
             pscorer.train(train_data);
             int count = 0;
             for(Double score : pscorer.score(train_data)){

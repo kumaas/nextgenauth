@@ -79,7 +79,7 @@ public class ImageAdapter extends BaseAdapter {
             public boolean onTouch(View v, MotionEvent event) {
                 // have same code as onTouchEvent() (for the Activity) above
                 Log.d("KeyPressed", String.valueOf(elementIndex));
-                Storage.addHistory(elementIndex, event.getX(), event.getY(), event.getPressure(), 0);
+                Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), 0);
                 ((LockScreen)mContext).display.append(String.valueOf(elementIndex));
                 return false;
             }

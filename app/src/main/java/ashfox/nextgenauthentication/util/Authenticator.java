@@ -16,20 +16,33 @@ public class Authenticator{
         }
 
         public AuthResult verify(ArrayList<KeyPressAttributes> train_data, ArrayList<KeyPressAttributes> test_data) {
-            PressureBasedScorer pscorer = new PressureBasedScorer();
-            Log.d("behen", String.valueOf(train_data.size()));
-            pscorer.train(train_data);
+            PressureBasedScorer prscorer = new PressureBasedScorer();
+            //Log.d("behen", String.valueOf(train_data.size()));
+            prscorer.train(train_data);
+            ArrayList<Double> pressure_scores = prscorer.score(test_data);
+
+            PositionBasedScorer posscorer = new PositionBasedScorer();
+            posscorer.train(train_data);
+            ArrayList<Double> position_scores = posscorer.score(test_data);
+
+            DurationBasedScorer durscorer = new DurationBasedScorer();
+            durscorer.train(train_data);
+            ArrayList<Double> duration_scores = durscorer.score(test_data);
+
             int count = 0;
-            for(Double score : pscorer.score(test_data)){
-                Log.d("xxxxxxxxx  ", String.valueOf(score));
-                if(score >= 0.8){
+            for(int i = 0; i < pressure_scores.size(); i++){
+                Log.d("xxxxxxxxx  ", String.valueOf(pressure_scores.get(i)) + " | "
+                                        + String.valueOf(position_scores.get(i)) + " | "
+                                        + String.valueOf(duration_scores.get(i)));
+                double score = (pressure_scores.get(i) + position_scores.get(i))/2;
+                if(score >= 0.35){
                     count++;
                 }
             }
             return (count >= test_data.size() / 2) ? AuthResult.PASSED : AuthResult.FAILED;
         }
 
-        public AuthResult verify() {
+        /*public AuthResult verify() {
             ArrayList<Double> static_data = new ArrayList<Double>(){{
                 add(5.0);
                 add(4.0);
@@ -59,7 +72,7 @@ public class Authenticator{
                 Log.d("xxxxxxxxx  ", String.valueOf(score));
             }
             return AuthResult.PASSED;
-        }
+        }*/
 
 
 }

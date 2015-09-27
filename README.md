@@ -1,15 +1,4 @@
-## Project Description ##
-
-### What is this repository for? ###
-
-* Authentication mechanism for the next generation which eliminates the use of a fixed passcode/password in favor of a machine learning model which uses various signals to generate a unique fingerprint as the user types in randomly generated numeric codes. 
-* Version 1.0 - Created by Anirudh Ramanathan (anirudh4444@tamu.edu) and Ashish Kumar (ashishkumar@gatech.edu) at GTHack 2015.
-
-### How do I get set up? ###
-
-* Can be directly imported into Android Studio. 
-* Dependencies: Included
-* Deployment instructions: Android device with Android 5.x or higher recommended.
+## Keystroke-Biometric Authenticator for Android ##
 
 ### Concept ###
 
@@ -36,3 +25,14 @@ Our application is implemented using Android because it provided to us, APIs tha
 The main screen of the application is shown below:
 
 ![training_application.png](https://bitbucket.org/repo/B6beke/images/2872883611-training_application.png)
+
+### What is this repository for? ###
+
+* Authentication mechanism for the next generation which eliminates the use of a fixed passcode/password in favor of a machine learning model which uses various signals to generate a unique fingerprint as the user types in randomly generated numeric codes. 
+* Version 1.0 - Created by Anirudh Ramanathan (anirudh4444@tamu.edu) and Ashish Kumar (ashishkumar@gatech.edu) at GTHack 2015.
+
+### How do I get set up? ###
+
+* Can be directly imported into Android Studio. 
+* Dependencies: Included
+* Deployment instructions: Android device with Android 5.x or higher recommended.

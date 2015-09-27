@@ -112,12 +112,16 @@ public class LockScreen extends Activity {
     }
 
     private long getRandomFiveDigits(){
-        Random r = new Random(System.currentTimeMillis());
-        return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+//        Random r = new Random(System.currentTimeMillis());
+//        return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+        long tmp = mNums[mNumIdx];
+        mNumIdx = (mNumIdx + 1) % mNums.length;
+        return tmp;
     }
 
     // Numbers!
-    private long[] mThumbIds = {
+    private static int mNumIdx = 0;
+    private long[] mNums = {
             98264137, 47026249,
             51457784, 42581236,
             76947571, 52479253,

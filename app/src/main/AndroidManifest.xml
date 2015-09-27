@@ -3,6 +3,7 @@
     package="ashfox.nextgenauthentication" >
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +19,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Metrics"
+            android:label="@string/title_activity_metrics" >
         </activity>
     </application>
 

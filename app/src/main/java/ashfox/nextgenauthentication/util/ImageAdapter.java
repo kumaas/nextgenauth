@@ -3,12 +3,15 @@ package ashfox.nextgenauthentication.util;
 /**
  * Created by anirudh on 9/26/15.
  */
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.drawable.ShapeDrawable;
+import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,14 +85,14 @@ public class ImageAdapter extends BaseAdapter {
         convertView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     LastKeyDownTime = System.currentTimeMillis();
                     return true;
                 }
 
                 long eventDuration = 0;
                 /* we now record the event*/
-                if(event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     eventDuration = System.currentTimeMillis() - LastKeyDownTime;
                     // have same code as onTouchEvent() (for the Activity) above
                     Storage.addCurrent(elementIndex, event.getX(), event.getY(), event.getPressure(), event.getSize()    /*eventDuration*/);

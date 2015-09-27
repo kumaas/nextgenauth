@@ -24,7 +24,6 @@ public class ButtonView extends ImageView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        Log.d("blah", "blahblah");
         Context context = getContext();
         CharSequence text = "Hello toast!";
         int duration = Toast.LENGTH_SHORT;

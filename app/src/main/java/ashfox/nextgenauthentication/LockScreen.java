@@ -2,7 +2,10 @@ package ashfox.nextgenauthentication;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.achartengine.chart.LineChart;
+import org.achartengine.chart.PieChart;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,6 +31,7 @@ import ashfox.nextgenauthentication.util.AuthResult;
 import ashfox.nextgenauthentication.util.Authenticator;
 import ashfox.nextgenauthentication.util.ImageAdapter;
 import ashfox.nextgenauthentication.util.KeyPressAttributes;
+import ashfox.nextgenauthentication.util.StatCollector;
 import ashfox.nextgenauthentication.util.Storage;
 
 /**
@@ -32,6 +39,7 @@ import ashfox.nextgenauthentication.util.Storage;
  */
 public class LockScreen extends Activity {
     public TextView display, challenge;
+
     public enum modes {TRAIN, AUTHENTICATE};
     private modes mode = modes.AUTHENTICATE;
     private GestureDetector detector;
@@ -63,7 +71,7 @@ public class LockScreen extends Activity {
         train.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton toggleButton, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     mode = modes.TRAIN;
                 } else {
                     mode = modes.AUTHENTICATE;
@@ -78,19 +86,51 @@ public class LockScreen extends Activity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // authenticate/train the model
 
+                // authenticate/train the model
                 if (mode == modes.AUTHENTICATE) {
+                    if(Storage.getHistory().size() <= 20) {
+                        Toast.makeText(getApplicationContext(), "Please train the model!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    StatCollector.addTrial();
                     Authenticator a = new Authenticator();
                     if (a.verify(Storage.getHistory(), Storage.getCurrent()) == AuthResult.PASSED) {
-                        Toast.makeText(getApplicationContext(), "Authenticated",
-                                Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(LockScreen.this)
+                                .setTitle("Authorized!")
+                                .setMessage("The model thinks this is the authorized user. Correct?")
+                                .setPositiveButton("Correct", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        StatCollector.addSuccess();
+                                    }
+                                })
+                                .setNegativeButton("Incorrect", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        StatCollector.addFalse_pos();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_input_add)
+                                .show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Authentication Failed",
-                                Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(LockScreen.this)
+                                .setTitle("Unauthorized!")
+                                .setMessage("The model thinks this is not the authorized user. Correct?")
+                                .setPositiveButton("Correct", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        StatCollector.addSuccess();
+                                    }
+                                })
+                                .setNegativeButton("Incorrect", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        StatCollector.addFalse_neg();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
                     }
-                } else if(mode == modes.TRAIN) {
-                    for(KeyPressAttributes kpa : Storage.getCurrent()){
+                } else if (mode == modes.TRAIN) {
+                    for (KeyPressAttributes kpa : Storage.getCurrent()) {
                         Storage.addHistory(kpa);
                     }
                     Toast.makeText(getApplicationContext(),
@@ -104,11 +144,26 @@ public class LockScreen extends Activity {
 
         });
 
+        Button metrics = (Button) findViewById(R.id.metrics);
+        metrics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LockScreen.this, Metrics.class);
+                LockScreen.this.startActivity(myIntent);
+            }
+        });
+
+
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         final ListAdapter adp = new ImageAdapter(this);
         gridview.setAdapter(adp);
+
+
+//        Intent lineChart = new LineChart().execute(getApplicationContext(), null, ???);
+//        startActivity(pieChart);
+
     }
 
     private long getRandomFiveDigits(){
